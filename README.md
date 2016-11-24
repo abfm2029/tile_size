@@ -7,4 +7,4 @@ Make sure you have the sqlite3 and matplotlib libraries installed for Ubuntu
 
 ## Usage
 
-Simply run "python tile_size.py tile.mbtiles". The final output will be a boxplot, split into zooms with the size in bytes and the bottom axis the zoom (starting at 1)
+Simply run "python tile_size.py tile.mbtiles". The final output will be a boxplot, split into zooms with the size in bytes and the bottom axis the zoom.
