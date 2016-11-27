@@ -1,0 +1,12 @@
+This is a rough description of what needs to be done to build a new logs file. The logs file is expected to be comma separated, with the first line being a zoom,x,y header
+
+The logs (logs.csv) are from OpenStreetMap.
+
+wget -r -nc -np -A xz http://planet.openstreetmap.org/tile_logs # Make sure this doesn't end up downloading outside of your current logs directory
+unxz *.xz
+sed -i 's/\// /g' *.txt
+rename 's/\.txt$/\.csv/' *.txt
+cut -d ' ' -f 1-3 * > remove_last_column
+sort -T . remove_last_column | uniq > unique_tiles 
+sed '1s;^;zoom,x,y\n;' unique_tiles > header.csv
+cat header.csv | tr " " "," > final.csv
