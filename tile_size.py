@@ -15,10 +15,10 @@ max_zoom = list(c)[0][0]
 size = [None]*(max_zoom+1)
 top_decile = [None]*(max_zoom+1)
 for zoom in range(0,max_zoom+1):
-	c.execute('SELECT length(tile_data) FROM map INNER JOIN images on map.tile_id = images.tile_id AND map.zoom_level = "'+str(zoom)+'"')  # Get tiles based on tile_id matching in inner join, that way the zoom_level can be accessed from the images tables
+	c.execute('SELECT LENGTH(tile_data) FROM tiles WHERE zoom_level = "'+str(zoom)+'"')	# Get size of tiles based on the zoom_level
 	size[zoom] = sorted(list(itertools.chain.from_iterable(list(c))))
 	leng = len(size[zoom])
-	top_decile[zoom] = size[zoom][int(math.floor(leng*0.9)):]
+	top_decile[zoom] = size[zoom][int(math.floor(leng*0.9)):]				# Take the approximate top 10% of the tile sizes
 
 plt.boxplot(size)
 plt.title('Tile size')
